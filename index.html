@@ -1,106 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Certificados Digitais - Financeiro</title>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Certificados Digitais - Financeiro | Importação automática</title>
 <style>
-*{box-sizing:border-box} body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#eef2f7;color:#1f2937}
-header{background:#0f3a5f;color:#fff;padding:22px 20px} header h1{margin:0 0 6px;font-size:26px} header p{margin:0;opacity:.9}
-.wrap{max-width:1100px;margin:0 auto;padding:18px}
-.links{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
-.links a,.btn{background:#fff;border:1px solid #d1d5db;border-radius:10px;padding:10px 14px;text-decoration:none;color:#0f3a5f;font-weight:700;cursor:pointer}
-.btn.primary{background:#0f3a5f;color:#fff;border-color:#0f3a5f} .btn.danger{background:#b91c1c;color:#fff;border-color:#b91c1c}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px} .card{background:#fff;border-radius:12px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06)} .card b{font-size:28px} .card span{color:#6b7280;font-size:13px}
-.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0} input,select{padding:10px;border:1px solid #d1d5db;border-radius:8px}
-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden} th,td{padding:12px;text-align:left;border-bottom:1px solid #eee;font-size:14px} th{background:#f8fafc}
-.pill{padding:4px 10px;border-radius:20px;font-weight:700;font-size:12px} .ok{background:#dcfce7} .warn{background:#fef9c3} .alert{background:#ffedd5} .bad{background:#fee2e2}
-.bar{height:8px;background:#eee;border-radius:99px;overflow:hidden} .bar i{display:block;height:100%}
-.hide{font-family:monospace} .small{color:#6b7280;font-size:13px;line-height:1.5} .box{background:#fff;border-radius:12px;padding:16px;margin-top:16px}
-@media(max-width:800px){.cards{grid-template-columns:1fr 1fr} table{font-size:12px}}
-</style>
-</head>
-<body>
-<header><h1>Certificados Digitais - Financeiro</h1><p>Controle de vencimentos • 11 certificados • Planilha + Pasta do Drive</p></header>
+*{box-sizing:border-box}body{font-family:Arial,sans-serif;margin:0;background:#eef2f7;color:#1f2937}
+header{background:#0f3a5f;color:#fff;padding:22px 20px}header h1{margin:0 0 6px}header p{margin:0;opacity:.9}
+.wrap{max-width:1200px;margin:0 auto;padding:18px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.links a,.btn{background:#fff;border:1px solid #d1d5db;border-radius:10px;padding:10px 14px;text-decoration:none;color:#0f3a5f;font-weight:700;cursor:pointer}
+.btn.primary{background:#0f3a5f;color:#fff}.btn.danger{background:#b91c1c;color:#fff;border-color:#b91c1c}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:#fff;border-radius:12px;padding:14px}.card b{font-size:28px}.card span{color:#6b7280;font-size:13px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}input,select{padding:10px;border:1px solid #d1d5db;border-radius:8px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}th,td{padding:10px;text-align:left;border-bottom:1px solid #eee;font-size:13px}th{background:#f8fafc}
+.pill{padding:4px 10px;border-radius:20px;font-weight:700;font-size:12px}.ok{background:#dcfce7}.warn{background:#fef9c3}.alert{background:#ffedd5}.bad{background:#fee2e2}
+.bar{height:8px;background:#eee;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%}
+.box{background:#fff;border-radius:12px;padding:16px;margin-top:16px}.small{color:#6b7280;font-size:13px;line-height:1.6}
+.warnbox{background:#fef3c7;border:1px solid #f59e0b;border-radius:12px;padding:14px;margin:14px 0;font-size:14px;line-height:1.5}
+code{background:#f3f4f6;padding:2px 6px;border-radius:6px}
+@media(max-width:800px){.cards{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<header><h1>Certificados Digitais - Financeiro</h1><p>15 certificados • Importação automática da planilha • CERTIFICADO / CNPJ / VENCIMENTO / SENHA / DOWNLOAD</p></header>
 <div class="wrap">
+<div class="warnbox">⚠️ <b>Como funciona:</b> a página busca os dados <b>direto da planilha</b> toda vez que abre. Por isso a planilha lida pela página <b>NÃO deve conter senhas</b> — senhas ficam salvas só neste navegador. Se a sua planilha atual tem senha, crie uma aba/planilha espelho sem a coluna SENHA para a página ler. <span id="status" style="display:block;margin-top:8px;font-weight:700">⏳ Carregando da planilha...</span></div>
 <div class="links">
-<a href="https://docs.google.com/spreadsheets/d/1k3BfILPTnwa14bRPdNmbvSA7Do3bknfCqULzl_5am68/edit?usp=sharing" target="_blank">📊 Abrir planilha CERTIFICADOS DO APOIO</a>
+<a href="https://docs.google.com/spreadsheets/d/1k3BfILPTnwa14bRPdNmbvSA7Do3bknfCqULzl_5am68/edit?usp=sharing" target="_blank">📊 Abrir planilha</a>
 <a href="https://drive.google.com/drive/folders/1VV_xjyZHEqCC4rTGycVYVV5PCIXXd0DU?usp=sharing" target="_blank">📁 Abrir pasta do Drive</a>
+<button class="btn primary" onclick="carregar()">🔄 Atualizar da planilha</button>
 </div>
-
 <div class="cards">
-<div class="card"><span>Total</span><br><b id="total">0</b></div>
+<div class="card"><span>Total</span><br><b id="total">0</b> / 15</div>
 <div class="card"><span>Vencendo em 30 dias</span><br><b id="v30">0</b></div>
 <div class="card"><span>Vencidos</span><br><b id="vencidos">0</b></div>
-<div class="card"><span>Próximo vencimento</span><br><b id="prox" style="font-size:18px">—</b></div>
+<div class="card"><span>Próximo vencimento</span><br><b id="prox" style="font-size:16px">—</b></div>
 </div>
-
 <div class="toolbar">
-<input id="busca" placeholder="Buscar por nome do certificado..." style="flex:1;min-width:220px">
+<input id="busca" placeholder="Buscar por certificado ou CNPJ..." style="flex:1;min-width:220px">
 <select id="filtro"><option value="todos">Todos</option><option value="30">Vencendo em 30 dias</option><option value="vencidos">Vencidos</option><option value="ativos">Ativos</option></select>
-<button class="btn primary" onclick="abrirForm()">+ Adicionar certificado</button>
 <button class="btn" onclick="exportar()">Exportar CSV</button>
-<button class="btn danger" onclick="limparExemplos()">Limpar exemplos</button>
 </div>
-
-<table><thead><tr><th>CERTIFICADO</th><th>VENCIMENTO</th><th>SENHA</th><th>DOWNLOAD</th><th>DIAS RESTANTES</th><th>STATUS</th><th>AÇÕES</th></tr></thead><tbody id="tbody"></tbody></table>
-
-<div class="box">
-<h3>Como renovar (faça igual nos 3 lugares)</h3>
-<p class="small"><b>1.</b> Suba o .pfx renovado na <a href="https://drive.google.com/drive/folders/1VV_xjyZHEqCC4rTGycVYVV5PCIXXd0DU?usp=sharing" target="_blank">pasta do Drive</a> e copie o link do arquivo.<br>
-<b>2.</b> Atualize a linha na <a href="https://docs.google.com/spreadsheets/d/1k3BfILPTnwa14bRPdNmbvSA7Do3bknfCqULzl_5am68/edit?usp=sharing" target="_blank">planilha CERTIFICADOS DO APOIO</a>: VENCIMENTO, SENHA e DOWNLOAD.<br>
-<b>3.</b> Aqui no painel, clique em <b>Editar</b> e cole o mesmo vencimento, senha e link.<br>
-⚠️ Esta página salva no navegador deste computador (localStorage). Não compartilhe publicamente. Deixe a pasta do Drive restrita ao financeiro.</p>
-</div>
-</div>
-
+<table><thead><tr><th>CERTIFICADO</th><th>CNPJ</th><th>VENCIMENTO</th><th>SENHA (só neste navegador)</th><th>DOWNLOAD</th><th>DIAS</th><th>STATUS</th></tr></thead><tbody id="tbody"></tbody></table>
+<div class="box"><h3>⚙️ Para a importação automática funcionar (fazer 1 vez na planilha)</h3>
+<p class="small"><b>1.</b> Na planilha, vá em <b>Arquivo &gt; Compartilhar &gt; Publicar na Web</b> → escolha a aba <b>Página1</b> → <b>Publicar</b>.<br>
+<b>OU</b> deixe a planilha com <b>Qualquer pessoa com o link pode visualizar</b>.<br>
+<b>2.</b> <b>IMPORTANTE:</b> a aba publicada <b>não pode ter a coluna SENHA</b>. Deixe a aba publicada só com: CERTIFICADO | CNPJ | VENCIMENTO | DOWNLOAD.<br>
+<b>3.</b> A senha de cada certificado você digita 1 vez aqui clicando em <b>Definir senha</b> — ela fica salva só neste navegador (localStorage), não volta para a planilha pública.<br>
+<b>4.</b> Quando renovar: atualize a planilha → clique em <b>Atualizar da planilha</b> aqui. O vencimento e o link atualizam sozinhos.<br><br>
+URL lida pela página: <code>https://docs.google.com/spreadsheets/d/1k3BfILPTnwa14bRPdNmbvSA7Do3bknfCqULzl_5am68/export?format=csv&gid=0</code><br>
+Se aparecer erro de acesso, é porque a planilha ainda não está publicada / compartilhada como visualização. Nesse caso, use o botão <b>Colar dados manualmente</b> abaixo.</p>
+<button class="btn" onclick="importarManual()">📋 Colar dados manualmente</button>
+<textarea id="importArea" style="width:100%;height:90px;display:none;margin-top:10px" placeholder="Cole aqui as linhas copiadas da planilha..."></textarea>
+<button class="btn primary" id="btnImportar2" style="display:none;margin-top:8px" onclick="confirmarImport()">Confirmar importação manual</button>
+</div></div>
 <script>
-const EXEMPLOS = Array.from({length:11},(_,i)=>({nome:'Empresa '+(String(i+1).padStart(2,'0'))+' - EXEMPLO', venc:'2026-12-'+String(10+i).padStart(2,'0'), senha:'', link:''}));
-let dados = JSON.parse(localStorage.getItem('certificados')||'null') || EXEMPLOS;
+const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/1k3BfILPTnwa14bRPdNmbvSA7Do3bknfCqULzl_5am68/export?format=csv&gid=0';
+let dados = [];
+let senhas = JSON.parse(localStorage.getItem('senhas15')||'{}');
+function parseBR(d){ if(!d) return ''; d=String(d).trim(); if(/^\d{4}-\d{2}-\d{2}$/.test(d)) return d; const p=d.split('/'); if(p.length===3) return `${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`; return d; }
 function dias(v){ if(!v) return null; const h=new Date(); h.setHours(0,0,0,0); return Math.ceil((new Date(v+'T00:00:00')-h)/86400000); }
-function salvar(){ localStorage.setItem('certificados', JSON.stringify(dados)); render(); }
-function render(){
-  const b=document.getElementById('busca').value.toLowerCase(), f=document.getElementById('filtro').value;
-  let lista=dados.filter(c=>c.nome.toLowerCase().includes(b));
-  if(f==='30') lista=lista.filter(c=>{let d=dias(c.venc); return d!==null&&d>=0&&d<=30});
-  if(f==='vencidos') lista=lista.filter(c=>dias(c.venc)<0);
-  if(f==='ativos') lista=lista.filter(c=>dias(c.venc)>=0);
-  document.getElementById('total').textContent=dados.length;
-  document.getElementById('v30').textContent=dados.filter(c=>{let d=dias(c.venc); return d!==null&&d>=0&&d<=30}).length;
-  document.getElementById('vencidos').textContent=dados.filter(c=>dias(c.venc)<0).length;
-  let fut=dados.filter(c=>dias(c.venc)>=0).sort((a,b)=>dias(a.venc)-dias(b.venc))[0];
-  document.getElementById('prox').textContent=fut? new Date(fut.venc+'T00:00:00').toLocaleDateString('pt-BR')+' - '+fut.nome : '—';
-  document.getElementById('tbody').innerHTML=lista.map((c,idx)=>{
-    const i=dados.indexOf(c), d=dias(c.venc);
-    const st=d<0?['VENCIDO','bad']:d<=30?['VENCE EM '+d+' DIAS','alert']:d<=60?['ATENÇÃO','warn']:['ATIVO','ok'];
-    const cor=d<0?'#ef4444':d<=30?'#f97316':d<=60?'#eab308':'#22c55e';
-    const pct=Math.max(0,Math.min(100, d/365*100));
-    return `<tr><td><b>${c.nome}</b></td><td>${c.venc?new Date(c.venc+'T00:00:00').toLocaleDateString('pt-BR'):'—'}</td>
-    <td><span class="hide" id="s${i}">••••••</span> <button onclick="mostrar(${i})">👁️</button> <button onclick="copiar('${(c.senha||'').replace(/'/g,'')}')">Copiar</button></td>
-    <td><a href="${c.link||'https://drive.google.com/drive/folders/1VV_xjyZHEqCC4rTGycVYVV5PCIXXd0DU?usp=sharing'}" target="_blank">${c.link?'Baixar .pfx':'Abrir pasta'}</a></td>
-    <td style="min-width:130px">${d===null?'—':d+' dias'}<div class="bar"><i style="width:${pct}%;background:${cor}"></i></div></td>
-    <td><span class="pill ${st[1]}">${st[0]}</span></td>
-    <td><button onclick="abrirForm(${i})">Editar</button> <button onclick="excluir(${i})">Excluir</button></td></tr>`;
-  }).join('') || '<tr><td colspan="7">Nenhum certificado. Clique em Adicionar certificado.</td></tr>';
+function parseCSV(t){
+  const rows=[]; let row=[], val='', inQ=false;
+  for(let i=0;i<t.length;i++){ const ch=t[i];
+    if(ch==='"'){ if(inQ && t[i+1]==='"'){ val+='"'; i++; } else inQ=!inQ; }
+    else if(ch===',' && !inQ){ row.push(val); val=''; }
+    else if(ch==='\n' && !inQ){ row.push(val); rows.push(row); row=[]; val=''; }
+    else if(ch!=='\r'){ val+=ch; }
+  } if(val||row.length) { row.push(val); rows.push(row); }
+  return rows;
 }
-function mostrar(i){ const el=document.getElementById('s'+i); el.textContent = el.textContent==='••••••' ? (dados[i].senha||'(sem senha)') : '••••••'; }
-function copiar(t){ navigator.clipboard.writeText(t); alert('Senha copiada!'); }
-function excluir(i){ if(confirm('Excluir '+dados[i].nome+'?')){ dados.splice(i,1); salvar(); } }
-function limparExemplos(){ if(confirm('Apagar todos os exemplos e começar do zero?')){ dados=[]; salvar(); } }
-function exportar(){ let csv='CERTIFICADO;VENCIMENTO;SENHA;DOWNLOAD\n'+dados.map(c=>`${c.nome};${c.venc};${c.senha};${c.link}`).join('\n'); let a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='certificados.csv'; a.click(); }
-function abrirForm(i=null){
-  const c = i===null? {nome:'',venc:'',senha:'',link:''} : dados[i];
-  const nome=prompt('CERTIFICADO (nome):', c.nome); if(nome===null) return;
-  const venc=prompt('VENCIMENTO (AAAA-MM-DD):', c.venc); if(venc===null) return;
-  const senha=prompt('SENHA:', c.senha); if(senha===null) return;
-  const link=prompt('DOWNLOAD (cole o link do .pfx da pasta do Drive):', c.link); if(link===null) return;
-  const obj={nome,venc,senha,link};
-  if(i===null) dados.push(obj); else dados[i]=obj;
-  salvar();
-}
-document.getElementById('busca').addEventListener('input', render);
-document.getElementById('filtro').addEventListener('change', render);
-render();
-</script>
-</body>
-</html>
+async function carregar(){
+  document.getElementById('status').textContent='⏳ Carregando da planilha...';
+  try{
+    const r = await fetch(SHEET_CSV);
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const txt = await r.text();
+    const rows = parseCSV(txt).filter(r=>r.join('').trim()!=='');
+    if(!rows.length) throw new Error('Planilha vazia');
+    const header = rows[0].map(h=>h.toLowerCase());
+    const idx = (names)=> header.findIndex(h=>names.some(n=>h.includes(n)));
+    const iNome = idx(['certificado','nome']), iCnpj = idx(['cnpj']), iVenc = idx(['vencimento','venc']), iLink = idx(['download','link']);
+    const lista=[];
+    for(let k=1;k<rows.length;k++){ const row=rows[k]; if(!row[iNome]) continue;
+      lista.push({nome:(row[iNome]||'').trim(), cnpj:iCnpj>=0?(row[iCnpj]||'').trim():'', venc:parseBR(row[iVenc]||''), link:iLink>=0?(
